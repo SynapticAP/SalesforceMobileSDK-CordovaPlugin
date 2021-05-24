@@ -12,7 +12,7 @@
             android:resource="@xml/app_restrictions" />
 
         <!-- Service required for authentication -->
-        <service android:exported="true"
+        <service android:exported="false"
             android:name="com.salesforce.androidsdk.auth.AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -78,7 +78,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.salesforce.androidsdk.push.SFDCFcmListenerService">
+        <service android:name="com.salesforce.androidsdk.push.SFDCFcmListenerService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
