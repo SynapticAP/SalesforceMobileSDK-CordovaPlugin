@@ -12,7 +12,7 @@
             android:resource="@xml/app_restrictions" />
 
         <!-- Service required for authentication -->
-        <service android:exported="true"
+        <service android:exported="false"
             android:name="com.salesforce.androidsdk.auth.AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />

@@ -5,5 +5,5 @@
     android:versionCode="75"
     android:versionName="9.2.1">
 
-    <application />
+    <application android:allowBackup="false"/>
 </manifest>
