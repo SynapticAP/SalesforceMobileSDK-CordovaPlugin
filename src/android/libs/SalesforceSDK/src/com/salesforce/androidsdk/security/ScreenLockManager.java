@@ -49,6 +49,7 @@ public class ScreenLockManager {
     public static final String SCREEN_LOCK = "screen_lock";
 
     private boolean backgroundedSinceUnlock = true;
+    private boolean waitingToBackground = false; // MODIFIED
 
     /**
      * Stores the mobile policy for the org upon user login.
@@ -76,6 +77,11 @@ public class ScreenLockManager {
      * To be called by the protected activity to lock the device when being resumed.
      */
     public void onAppForegrounded() {
+        // BEGIN MODIFIED
+        if (waitingToBackground) {
+            waitingToBackground = false;
+        }
+        // END MODIFIED
         if (shouldLock()) {
             lock();
         }
@@ -85,7 +91,20 @@ public class ScreenLockManager {
      * To be called by the protected activity is paused to denote that the app should lock.
      */
     public void onAppBackgrounded() {
-        backgroundedSinceUnlock = true;
+        // BEGIN MODIFIED
+        // backgroundedSinceUnlock = true;
+        waitingToBackground = true;
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+            new Runnable() {
+                public void run() {
+                    if (waitingToBackground) {
+                        backgroundedSinceUnlock = true;
+                        waitingToBackground = false;
+                    }
+                }
+            },
+        60000);
+        // END MODIFIED
     }
 
     /**
