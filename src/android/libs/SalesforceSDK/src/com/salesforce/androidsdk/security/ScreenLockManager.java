@@ -49,7 +49,18 @@ public class ScreenLockManager {
     public static final String SCREEN_LOCK = "screen_lock";
 
     private boolean backgroundedSinceUnlock = true;
-    private boolean waitingToBackground = false; // MODIFIED
+    // START MODIFIED
+    private boolean waitingToBackground = false;
+    Runnable setBackgroundedFlags = new Runnable() {
+        public void run() {
+            if (waitingToBackground) {
+                backgroundedSinceUnlock = true;
+                waitingToBackground = false;
+            }
+        }
+    };
+    private android.os.Handler backgroundDelayHandler = new android.os.Handler(Looper.getMainLooper());
+    // END MODIFIED
 
     /**
      * Stores the mobile policy for the org upon user login.
@@ -78,6 +89,7 @@ public class ScreenLockManager {
      */
     public void onAppForegrounded() {
         // BEGIN MODIFIED
+        backgroundDelayHandler.removeCallbacks(setBackgroundedFlags);
         if (waitingToBackground) {
             waitingToBackground = false;
         }
@@ -94,16 +106,7 @@ public class ScreenLockManager {
         // BEGIN MODIFIED
         // backgroundedSinceUnlock = true;
         waitingToBackground = true;
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-            new Runnable() {
-                public void run() {
-                    if (waitingToBackground) {
-                        backgroundedSinceUnlock = true;
-                        waitingToBackground = false;
-                    }
-                }
-            },
-        60000);
+        backgroundDelayHandler.postDelayed(setBackgroundedFlags,60000);
         // END MODIFIED
     }
 
