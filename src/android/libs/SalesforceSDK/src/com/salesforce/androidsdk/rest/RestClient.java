@@ -685,9 +685,11 @@ public class RestClient {
 			int responseCode = response.code();
 
 			/*
-			 * Standard access token expiry returns 401 as the error code.
+			 * Standard access token expiry returns 401 or 403 as the error code.
 			 */
-            if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+			 // BEGIN MODIFIED:
+            if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED || responseCode == HttpURLConnection.HTTP_FORBIDDEN) {
+			// END MODIFIED
 				final URI curInstanceUrl = clientInfo.getInstanceUrl();
 				if (curInstanceUrl != null) {
 					final HttpUrl currentInstanceUrl = HttpUrl.get(curInstanceUrl);
