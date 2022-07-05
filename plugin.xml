@@ -14,12 +14,12 @@
   <js-module src="www/com.salesforce.plugin.oauth.js" name="plugin.oauth"></js-module>
   <js-module src="www/com.salesforce.plugin.network.js" name="plugin.network"></js-module>
   <js-module src="www/com.salesforce.plugin.sdkinfo.js" name="plugin.sdkinfo"></js-module>
-  <js-module src="www/com.salesforce.plugin.smartstore.js" name="plugin.smartstore">
+  <!-- <js-module src="www/com.salesforce.plugin.smartstore.js" name="plugin.smartstore">
     <clobbers target="navigator.smartstore" />
-  </js-module>
-  <js-module src="www/com.salesforce.plugin.smartstore.client.js" name="plugin.smartstore.client">
+  </js-module> -->
+  <!-- <js-module src="www/com.salesforce.plugin.smartstore.client.js" name="plugin.smartstore.client">
     <clobbers target="navigator.smartstoreClient" />
-  </js-module>
+  </js-module> -->
   <js-module src="www/com.salesforce.plugin.sfaccountmanager.js" name="plugin.sfaccountmanager"></js-module>
   <js-module src="www/com.salesforce.plugin.mobilesync.js" name="plugin.mobilesync"></js-module>
   <js-module src="www/com.salesforce.util.bootstrap.js" name="util.bootstrap"></js-module>
@@ -62,7 +62,7 @@
       <feature name="com.salesforce.network"><param name="ios-package" value="SFNetworkPlugin"/></feature>
       <feature name="com.salesforce.sdkinfo"><param name="ios-package" value="SFSDKInfoPlugin"/></feature>
       <feature name="com.salesforce.sfaccountmanager"><param name="ios-package" value="SFAccountManagerPlugin"/></feature>
-      <feature name="com.salesforce.smartstore"><param name="ios-package" value="SFSmartStorePlugin"/></feature>
+      <!-- <feature name="com.salesforce.smartstore"><param name="ios-package" value="SFSmartStorePlugin"/></feature> -->
       <feature name="com.salesforce.mobilesync"><param name="ios-package" value="SFMobileSyncPlugin"/></feature>
     </config-file>
 
@@ -102,9 +102,9 @@
          <pods use-frameworks="true">
            <pod name="SalesforceHybridSDK" git="https://github.com/forcedotcom/SalesforceMobileSDK-iOS-Hybrid" tag="v9.2.1" />
            <pod name="MobileSync" git="https://github.com/SynapticAP/SalesforceMobileSDK-iOS" tag="v9.2.1-custom" />
-           <pod name="SmartStore" git="https://github.com/SynapticAP/SalesforceMobileSDK-iOS" tag="v9.2.1-custom" />
-           <pod name="FMDB/SQLCipher" git="https://github.com/ccgus/fmdb" tag="2.7.5" />
-           <pod name="SQLCipher/fts" git="https://github.com/sqlcipher/sqlcipher" tag="v4.4.3" />
+           <!-- <pod name="SmartStore" git="https://github.com/SynapticAP/SalesforceMobileSDK-iOS" tag="v9.2.1-custom" /> -->
+           <!-- <pod name="FMDB/SQLCipher" git="https://github.com/ccgus/fmdb" tag="2.7.5" /> -->
+           <!-- <pod name="SQLCipher/fts" git="https://github.com/sqlcipher/sqlcipher" tag="v4.4.3" /> -->
            <pod name="SalesforceSDKCore" git="https://github.com/SynapticAP/SalesforceMobileSDK-iOS" tag="v9.2.1-custom" />
            <pod name="SalesforceAnalytics" git="https://github.com/SynapticAP/SalesforceMobileSDK-iOS" tag="v9.2.1-custom" />
            <pod name="SalesforceSDKCommon" git="https://github.com/SynapticAP/SalesforceMobileSDK-iOS" tag="v9.2.1-custom" />
@@ -179,7 +179,7 @@
       <feature name="com.salesforce.network"><param name="android-package" value="com.salesforce.androidsdk.phonegap.plugin.SalesforceNetworkPlugin"/></feature>
       <feature name="com.salesforce.sfaccountmanager"><param name="android-package" value="com.salesforce.androidsdk.phonegap.plugin.SFAccountManagerPlugin"/></feature>
       <feature name="com.salesforce.sdkinfo"><param name="android-package" value="com.salesforce.androidsdk.phonegap.plugin.SDKInfoPlugin"/></feature>
-      <feature name="com.salesforce.smartstore"><param name="android-package" value="com.salesforce.androidsdk.phonegap.plugin.SmartStorePlugin"/></feature>
+      <!-- <feature name="com.salesforce.smartstore"><param name="android-package" value="com.salesforce.androidsdk.phonegap.plugin.SmartStorePlugin"/></feature> -->
       <feature name="com.salesforce.mobilesync"><param name="android-package" value="com.salesforce.androidsdk.phonegap.plugin.MobileSyncPlugin"/></feature>
     </config-file>
 
