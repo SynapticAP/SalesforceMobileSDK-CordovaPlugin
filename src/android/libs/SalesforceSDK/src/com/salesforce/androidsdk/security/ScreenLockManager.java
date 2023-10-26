@@ -29,7 +29,7 @@ package com.salesforce.androidsdk.security;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
+import android.os.Looper;
 import androidx.annotation.VisibleForTesting;
 
 import com.salesforce.androidsdk.accounts.UserAccount;
@@ -50,7 +50,19 @@ public class ScreenLockManager {
     public static final String SCREEN_LOCK = "screen_lock";
     public static final String SCREEN_LOCK_TIMEOUT = "screen_lock_timeout";
 
-    private long lastLockedTimestamp = 0;
+    private boolean backgroundedSinceUnlock = true;
+    // START MODIFIED
+    private boolean waitingToBackground = false;
+    Runnable setBackgroundedFlags = new Runnable() {
+        public void run() {
+            if (waitingToBackground) {
+                backgroundedSinceUnlock = true;
+                waitingToBackground = false;
+            }
+        }
+    };
+    private android.os.Handler backgroundDelayHandler = new android.os.Handler(Looper.getMainLooper());
+    // END MODIFIED
 
     /**
      * Stores the mobile policy for the org upon user login.
@@ -95,6 +107,12 @@ public class ScreenLockManager {
      * To be called by the protected activity to lock the device when being resumed.
      */
     public void onAppForegrounded() {
+        // BEGIN MODIFIED
+        backgroundDelayHandler.removeCallbacks(setBackgroundedFlags);
+        if (waitingToBackground) {
+            waitingToBackground = false;
+        }
+        // END MODIFIED
         if (shouldLock()) {
             lock();
         }
@@ -104,7 +122,12 @@ public class ScreenLockManager {
      * To be called by the protected activity is paused to denote that the app should lock.
      */
     public void onAppBackgrounded() {
+        // BEGIN MODIFIED
+        // backgroundedSinceUnlock = true;
+        waitingToBackground = true;
+        backgroundDelayHandler.postDelayed(setBackgroundedFlags,60000);
         lastLockedTimestamp = System.currentTimeMillis();
+        // END MODIFIED
     }
 
     /**

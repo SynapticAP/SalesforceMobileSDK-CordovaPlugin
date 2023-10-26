@@ -66,6 +66,11 @@
       <feature name="com.salesforce.mobilesync"><param name="ios-package" value="SFMobileSyncPlugin"/></feature>
     </config-file>
 
+    <!-- Permissions -->
+    <config-file target="*-Info.plist" parent="NSFaceIDUsageDescription">
+      <string>This app requires Face ID access to function properly.</string>
+    </config-file>
+
     <!-- Entitlements -->
     <config-file parent="aps-environment" target="*/Entitlements-Debug.plist">
       <string>development</string>
@@ -136,9 +141,8 @@
           android:name="com.salesforce.androidsdk.phonegap.ui.SalesforceDroidGapActivity"
           android:theme="@style/SalesforceSDK_SplashScreen"
           android:windowSoftInputMode="adjustResize"
-          android:launchMode="singleTop" 
-          android:allowBackup="false"
-          android:exported="true"/>
+          android:launchMode="singleTask" 
+          android:allowBackup="false" />
     </edit-config>
 
     <!-- Fixes the application tag in the Manifest -->
